@@ -42,4 +42,12 @@ Clone all git repositories:
 
 ```bash
 sapi get projects | jq -r '.[] | (.ssh_url_to_repo, (.path_with_namespace | gsub("/"; "_")))' -c | parallel -N 2 -j 8 git clone
+# or with xargs
+sapi get projects | jq -r '.[] | (.ssh_url_to_repo, (.path_with_namespace | gsub("/"; "_")))' -c | xargs -n 2 -p 8 git clone
+```
+
+Clone new git repositories:
+
+```bash
+sapi get projects | jq -r '.[] | (.ssh_url_to_repo, (.path_with_namespace | gsub("/"; "_")))' -c | parallel -N 2 -j 8 'bash -c "[ ! -e {2} ] && git clone {1} {2}"'
 ```
