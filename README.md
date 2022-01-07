@@ -51,3 +51,9 @@ Clone new git repositories:
 ```bash
 sapi get projects | jq -r '.[] | (.ssh_url_to_repo, (.path_with_namespace | gsub("/"; "_")))' -c | parallel -N 2 -j 8 'bash -c "[ ! -e {2} ] && git clone {1} {2}"'
 ```
+
+Create a new `stage` branch in all repositories and protect it:
+
+```bash
+sapi get projects | jq -r '.[].id' -c | parallel -N 1 -- 'sapi post projects/{1}/repository/branches branch=stage ref=main; sapi post projects/{1}/protected_branches name=stage;' | jq .
+```
