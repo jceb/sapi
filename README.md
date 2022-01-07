@@ -37,3 +37,9 @@ List one project:
 ```bash
 P=1 sapi get projects per_page=1 | jq .
 ```
+
+Clone all git repositories:
+
+```bash
+sapi get projects | jq -r '.[] | (.ssh_url_to_repo, (.path_with_namespace | gsub("/"; "_")))' -c | parallel -N 2 -j 8 git clone
+```
