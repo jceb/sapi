@@ -1,9 +1,15 @@
 # sapi
 
+`sapi` is a Swiss Army Knife for dealing with APIs. The goal is to make it easy
+to get JSON data from APIs for further processing on the CLI.
+
+Currently, `sapi` supports
+[GitLab's API](https://docs.gitlab.com/ee/api/api_resources.html).
+
 ## Install
 
 ```bash
-deno install -n sapi --allow-env=P,TOKEN,URL,NODE_ENV --allow-net https://deno.land/x/sapi
+deno install -n sapi --allow-env=P,TOKEN,URL,NODE_ENV --allow-net https://deno.land/x/sapi/sapi.js
 ```
 
 ## Usage
