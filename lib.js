@@ -1,4 +1,3 @@
-#!/usr/bin/env -S deno run --allow-env=NODE_ENV --allow-net
 import sanctuary from "https://cdn.skypack.dev/sanctuary";
 import $ from "https://cdn.skypack.dev/sanctuary-def";
 import { env as flutureEnv } from "https://cdn.skypack.dev/fluture-sanctuary-types";
