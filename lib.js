@@ -174,17 +174,9 @@ export const gitLabFetch = (fetch_one) =>
       return S.pipe([
         S.map(toURL),
         whenGetMethod(S.map(setDefaultSearchParam("per_page", "100"))),
-        // url pair steht
-        S.ifElse(() => fetch_one === true)(
-          S.pipe([fetchURL(initAttrs), S.chain(toJSON)]),
-        )(
-          drainURL(initAttrs),
-        ),
-        S.map((res) => JSON.stringify(res)),
-        // S.map(log("fetchURL")),
-        // S.chain(toJSON),
-        // get results
-        // fetch next page
-        // S.map((res) => S.when(() => res.headers.get("x-next-page"))),
+        S.ifElse((urlPair) =>
+          fetch_one === true ||
+          S.not(S.equals("get")(S.toLower(S.fst(urlPair))))
+        )(S.pipe([fetchURL(initAttrs), S.chain(toJSON)]))(drainURL(initAttrs)),
       ])(urlPair);
     };
