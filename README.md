@@ -1,6 +1,6 @@
 # sapi
 
-`sapi` is a Swiss Army Knife for dealing with APIs. The goal is to make it easy
+`sapi` is a Swiss Army Knife for interacting with APIs. The goal is to make it easy
 to get JSON data from APIs for further processing on the CLI.
 
 Currently, `sapi` supports
