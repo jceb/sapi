@@ -11,7 +11,11 @@ F.fork(console.error)(console.log)(
       ),
       S.map((res) => JSON.stringify(res)),
     ])),
-    S.fromMaybe(F.reject("Insufficient arguments provided")),
+    S.fromMaybe(
+      F.reject(
+        "Insufficient arguments provided\n\tURL, TOKEN and P (number of pages to fetch) must be set\n\tUsage: URL=https://... TOKEN=xyz P=1 sapi HTTPVERB PATH_OF_URL",
+      ),
+    ),
     // log("nix mehr?"),
     // x => F.reject('Insufficient arguments provided')
   ])(Deno.args),
