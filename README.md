@@ -9,7 +9,7 @@ Currently, `sapi` supports
 ## Install
 
 ```bash
-deno install -n sapi --allow-env=P,TOKEN,URL,NODE_ENV --allow-net https://deno.land/x/sapi/sapi.js
+deno install -n sapi --allow-env=P,TOKEN,URL,NODE_ENV --allow-net https://deno.land/x/sapi@0.0.5/sapi.js
 ```
 
 ## Usage
