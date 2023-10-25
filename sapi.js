@@ -6,7 +6,7 @@ F.fork(console.error)(console.log)(
   S.pipe([
     buildURL(Deno.env.get("URL")),
     S.map(S.pipe([
-      gitLabFetch(Boolean(Number(Deno.env.get("P") || "0")))(
+      gitLabFetch(Boolean(Number(Deno.env.get("P") || "1")))(
         Deno.env.get("TOKEN"),
       ),
       S.map((res) => JSON.stringify(res)),

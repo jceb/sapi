@@ -124,14 +124,21 @@ const toURL = (url) => {
 
 // toJSON :: Response -> Object
 const toJSON = F.encaseP((response) =>
-  response.json().catch(() => response.body)
+  response.json().catch(() => {
+    console.error("Failed to convert response to JSON:", response.url);
+    return response.body;
+  })
 );
 
 // listOfRemainingPageIndexes :: Response -> Array(Integer)
 const listOfRemainingPageIndexes = (response) =>
   S.range(2)(
     S.fromMaybe(1)(
-      S.parseInt(10)(response.headers.get("x-total-pages")),
+      S.parseInt(10)(
+        typeof response.headers.get("x-total-pages") === "string"
+          ? response.headers.get("x-total-pages")
+          : "",
+      ),
     ),
   );
 
@@ -157,7 +164,13 @@ const drainURL = (initAttrs) => (urlPair) =>
       S.map(toJSON),
       F.parallel(5),
     ])),
-    S.map(S.join),
+    S.map((results) => {
+      if (results.length > 1) {
+        return S.join(results);
+      } else {
+        return results[0];
+      }
+    }),
   ])(urlPair);
 
 // gitLabFetch :: token -> Pair(HTTP_Method_String)(URL_String) -> Future(Response)
@@ -168,8 +181,13 @@ export const gitLabFetch = (fetch_one) => (token) => (urlPair) => {
     S.map(toURL),
     whenGetMethod(S.map(setDefaultSearchParam("per_page", "100"))),
     S.ifElse((urlPair) =>
-      fetch_one === true ||
+      fetch_one ||
       S.not(S.equals("get")(S.toLower(S.fst(urlPair))))
-    )(S.pipe([fetchURL(initAttrs), S.chain(toJSON)]))(drainURL(initAttrs)),
+    )(S.pipe([
+      fetchURL(initAttrs),
+      S.chain(toJSON),
+    ]))(
+      drainURL(initAttrs),
+    ),
   ])(urlPair);
 };
