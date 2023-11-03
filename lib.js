@@ -134,7 +134,10 @@ const toJSON = F.encaseP((response) =>
 const listOfRemainingPageIndexes = (response) =>
   S.range(2)(
     S.fromMaybe(1)(
-      S.parseInt(10)(
+      S.pipe([
+        S.parseInt(10),
+        S.map((x) => x + 1),
+      ])(
         typeof response.headers.get("x-total-pages") === "string"
           ? response.headers.get("x-total-pages")
           : "",
