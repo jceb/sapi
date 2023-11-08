@@ -20,5 +20,3 @@ F.fork(console.error)(console.log)(
     // x => F.reject('Insufficient arguments provided')
   ])(Deno.args),
 );
-
-// vi: ft=javascript

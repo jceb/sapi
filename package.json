@@ -1,0 +1,6 @@
+{
+  "name": "sapi",
+  "description": "Swiss Army Knife for interacting with APIs",
+  "version": "0.0.8",
+  "registry": "docker.io/jceb"
+}

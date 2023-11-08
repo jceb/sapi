@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.177.1/",
+    "fluture": "https://cdn.skypack.dev/fluture@14.0.0",
+    "sanctuary-def": "https://cdn.skypack.dev/sanctuary-def@0.22.0",
+    "sanctuary": "https://cdn.skypack.dev/sanctuary@3.1.0",
+    "fluture-sanctuary-types": "https://cdn.skypack.dev/fluture-sanctuary-types@7.1.0"
+  },
+  "scopes": {
+  }
+}

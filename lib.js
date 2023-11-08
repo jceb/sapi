@@ -1,6 +1,7 @@
-import sanctuary from "https://cdn.skypack.dev/sanctuary";
-import $ from "https://cdn.skypack.dev/sanctuary-def";
-import { env as flutureEnv } from "https://cdn.skypack.dev/fluture-sanctuary-types";
+import sanctuary from "sanctuary";
+import $ from "sanctuary-def";
+import { env as flutureEnv } from "fluture-sanctuary-types";
+import * as Fluture from "fluture";
 
 export const PromiseType = $.NullaryType("Promise")(
   "https://github.com/identinet/identinet#Promise",
@@ -46,7 +47,6 @@ export const def = $.create({
 S.types = {};
 sanctuary.map((t) => (S.types[t.name] = t))(env);
 
-import * as Fluture from "https://cdn.skypack.dev/fluture";
 export const F = Fluture;
 
 export const log = (msg) => (value) => {
