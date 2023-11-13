@@ -92,6 +92,7 @@
         };
 
         nuDirenvHook = writeText "nuDirenvHook" ''
+          # Source: https://www.nushell.sh/cookbook/direnv.html
           $env.config = {
             hooks: {
               pre_prompt: [{ ||
